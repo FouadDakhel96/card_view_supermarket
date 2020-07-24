@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/card_view_supermarket/static/css/main.cbca3727.chunk.css",
+    "main.js": "/card_view_supermarket/static/js/main.c2ef7185.chunk.js",
+    "main.js.map": "/card_view_supermarket/static/js/main.c2ef7185.chunk.js.map",
+    "runtime-main.js": "/card_view_supermarket/static/js/runtime-main.ec4cf71b.js",
+    "runtime-main.js.map": "/card_view_supermarket/static/js/runtime-main.ec4cf71b.js.map",
+    "static/js/2.18e815c3.chunk.js": "/card_view_supermarket/static/js/2.18e815c3.chunk.js",
+    "static/js/2.18e815c3.chunk.js.map": "/card_view_supermarket/static/js/2.18e815c3.chunk.js.map",
+    "index.html": "/card_view_supermarket/index.html",
+    "precache-manifest.4408548cd0682e5dc267e144a6637f83.js": "/card_view_supermarket/precache-manifest.4408548cd0682e5dc267e144a6637f83.js",
+    "service-worker.js": "/card_view_supermarket/service-worker.js",
+    "static/css/main.cbca3727.chunk.css.map": "/card_view_supermarket/static/css/main.cbca3727.chunk.css.map",
+    "static/js/2.18e815c3.chunk.js.LICENSE.txt": "/card_view_supermarket/static/js/2.18e815c3.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ec4cf71b.js",
+    "static/js/2.18e815c3.chunk.js",
+    "static/css/main.cbca3727.chunk.css",
+    "static/js/main.c2ef7185.chunk.js"
+  ]
+}
