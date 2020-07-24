@@ -290,31 +290,30 @@ class App extends Component {
   }
   render() {
     return (
-      <div className='cardContainer' style={{display: 'flex',justifyContent: 'center',alignItems: 'center'}}>
-        {
-          data_to_arrange.map((item)=>
-            <TinderCard className='swipe' key={item.name} onSwipe={(dir) => this.swiped(dir, item.name,item.barcode) } onCardLeftScreen={() => this.outOfFrame(item.name)}>
-              <div className='card' style={{padding: 10}}>
-                <div style={{maxWidth: 375,overflow: 'hidden'}}>
-                  <img
-                    src={'https://nana.sa/'+item.image}
-                    alt="صورة المنتج"
-                    style={{maxHeight: 300}}
-                  />
+        <div className='cardContainer' style={{justifyContent: 'center',alignItems: 'center',display: 'flex'}}>
+          {
+            data_to_arrange.map((item)=>
+
+              <TinderCard className='swipe' key={item.name} onSwipe={(dir) => this.swiped(dir, item.name,item.barcode) } onCardLeftScreen={() => this.outOfFrame(item.name)}>
+                <div className='card' style={{padding: 10}}>
+                  <div style={{maxWidth: 375,overflow: 'hidden'}}>
+                    <img
+                      src={'https://nana.sa/'+item.image}
+                      alt="صورة المنتج"
+                      style={{maxHeight: 300}}
+                    />
+                  </div>
+
+                  <h4 style={{color: 'black'}}>اسم المنتج : {item.name}</h4>
+                <h4 style={{color: 'black'}}>سعر المنتج : {item.price.toFixed(2)} ريال</h4>
+                  <h4 style={{color:'black'}}>هل السعر صحيح؟</h4>
+                  <Button variant="outline-success" size="lg" block disabled>اسحب لليمين اذا كان صحيح </Button>
+                  <Button variant="outline-danger" size="lg" block disabled>اسحب لليسار اذا كان خاطئ</Button>
+
                 </div>
-
-              <h4 style={{color: 'black'}}>اسم المنتج : {item.name}</h4>
-              <h4 style={{color: 'black'}}>سعر المنتج : {item.price} ريال</h4>
-            <h4 style={{color:'black'}}>هل السعر صحيح؟</h4>
-            <Button variant="outline-success" size="lg" block disabled>اسحب لليمين اذا كان صحيح </Button>
-            <Button variant="outline-danger" size="lg" block disabled>اسحب لليسار اذا كان خاطئ</Button>
-
-              </div>
-
-            </TinderCard>
-        )}
-
-      </div>
+              </TinderCard>
+          )}
+        </div>
     );
   }
 
