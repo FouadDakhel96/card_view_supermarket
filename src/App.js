@@ -2,6 +2,8 @@ import React, { Component  } from 'react';
 import TinderCard from 'react-tinder-card'
 import './App.css'
 import { Button } from 'react-bootstrap';
+var Barcode = require('react-barcode');
+
 
 let data_to_arrange =
 [
@@ -296,20 +298,24 @@ class App extends Component {
 
               <TinderCard className='swipe' key={item.name} onSwipe={(dir) => this.swiped(dir, item.name,item.barcode) } onCardLeftScreen={() => this.outOfFrame(item.name)}>
                 <div className='card' style={{padding: 10}}>
+
                   <div style={{maxWidth: 375,overflow: 'hidden'}}>
                     <img
                       src={'https://nana.sa/'+item.image}
                       alt="صورة المنتج"
-                      style={{maxHeight: 300}}
+                      style={{maxHeight: 130}}
                     />
                   </div>
 
-                  <h4 style={{color: 'black'}}>اسم المنتج : {item.name}</h4>
-                <h4 style={{color: 'black'}}>سعر المنتج : {item.price.toFixed(2)} ريال</h4>
-                  <h4 style={{color:'black'}}>هل السعر صحيح؟</h4>
-                  <Button variant="outline-success" size="lg" block disabled>اسحب لليمين اذا كان صحيح </Button>
-                  <Button variant="outline-danger" size="lg" block disabled>اسحب لليسار اذا كان خاطئ</Button>
+                  <h6 style={{color: 'green'}}>اسم المنتج : {item.name}</h6>
+                  <h6 style={{color: 'green'}}>سعر المنتج : {item.price.toFixed(2)} ريال</h6>
+                  <Barcode value={item.barcode} format={item.barcode.length===13 ? "EAN13" : item.barcode.length===8 ? "EAN8" : "UPC"} width={1.5}/>
 
+                  <h4 style={{color:'red'}}>هل السعر صحيح؟</h4>
+                  <div style={{display: 'flex',flexDirection: 'row-reverse',width: '100%',justifyContent: 'space-between',alignItems: 'center',height: 30}}>
+                    <Button onClick={() =>this.swiped('right', item.name,item.barcode)} variant="success" style={{width: '45%',height: 30,padding: 0}}>نعم</Button>
+                    <Button variant="danger" style={{width: '45%',height: 30,padding: 0}}>لا</Button>
+                  </div>
                 </div>
               </TinderCard>
           )}
