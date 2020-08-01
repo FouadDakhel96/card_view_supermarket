@@ -303,19 +303,25 @@ class App extends Component {
                     <img
                       src={'https://nana.sa/'+item.image}
                       alt="صورة المنتج"
-                      style={{maxHeight: 130}}
+                      style={{maxHeight: 250}}
                     />
                   </div>
 
-                  <h6 style={{color: 'green'}}>اسم المنتج : {item.name}</h6>
-                  <h6 style={{color: 'green'}}>سعر المنتج : {item.price.toFixed(2)} ريال</h6>
-                  <Barcode value={item.barcode} format={item.barcode.length===13 ? "EAN13" : item.barcode.length===8 ? "EAN8" : "UPC"} width={1.5}/>
-
-                  <h4 style={{color:'red'}}>هل السعر صحيح؟</h4>
-                  <div style={{display: 'flex',flexDirection: 'row-reverse',width: '100%',justifyContent: 'space-between',alignItems: 'center',height: 30}}>
-                    <Button onClick={() =>this.swiped('right', item.name,item.barcode)} variant="success" style={{width: '45%',height: 30,padding: 0}}>نعم</Button>
-                    <Button variant="danger" style={{width: '45%',height: 30,padding: 0}}>لا</Button>
+                  <h5 style={{color: 'black'}}>{item.name}</h5>
+                  <div style={{display: 'flex',flexDirection: 'row',alignItems: 'center',paddingBottom: 0,marginBottom: 0}}>
+                    <h2 style={{color: 'red'}}>{item.price.toFixed(2)} </h2>
+                  <h5 style={{color: 'red',marginLeft: 5}}> SAR </h5>
                   </div>
+
+                  {/* <h4 style={{color:'red'}}>هل السعر صحيح؟</h4> */}
+                  <Button variant="success" block style={{height: 30,padding: 0,marginBottom: 5}}>اعتماد</Button>
+
+                  <div style={{display: 'flex',flexDirection: 'row',width: '100%',justifyContent: 'space-between',alignItems: 'center',height: 30}}>
+                    <Button onClick={() =>console.log(TinderCard)} variant="secondary" style={{width: '49%',height: 30,padding: 0}}>لاحقاً</Button>
+                  <Button variant="danger" style={{width: '49%',height: 30,padding: 0}}>تغيير السعر</Button>
+                  </div>
+                  <Barcode style={{marginTop: 0}}value={item.barcode} format={item.barcode.length===13 ? "EAN13" : item.barcode.length===8 ? "EAN8" : "UPC"} width={1.5}  height={40}/>
+
                 </div>
               </TinderCard>
           )}
