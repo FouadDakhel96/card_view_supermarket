@@ -1,12 +1,17 @@
-import React, { Component  } from 'react';
-import TinderCard from 'react-tinder-card'
-import './App.css'
+import React from 'react';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import MobileStepper from '@material-ui/core/MobileStepper';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import Button2 from '@material-ui/core/Button';
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import { Button } from 'react-bootstrap';
-import Card from './card'
 var Barcode = require('react-barcode');
 
 
-let data_to_arrange =
+
+const data_to_arrange =
 [
   {
     "sub_category": "تزيين مخبوزات",
@@ -253,86 +258,143 @@ let data_to_arrange =
 ]
 let correct_prices = []
 let wrong_prices = []
+let ignore_prices =[]
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      lastDirection:null,
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    maxWidth: 400,
+    flexGrow: 1,
+  },
+  header: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent:'center',
+    marginBottom:5,
+    height: 50,
+    // paddingLeft: theme.spacing(4),
+    backgroundColor: theme.palette.background.default,
+  },
+  header2: {
+    marginBottom:5,
+    // paddingLeft: theme.spacing(4),
+    backgroundColor: theme.palette.background.default,
+  },
+  img: {
+    height: 255,
+    maxWidth: 400,
+    overflow: 'hidden',
+    display: 'block',
+    width: '100%',
+  },
+}));
+
+export default function TextMobileStepper() {
+  const classes = useStyles();
+  const theme = useTheme();
+  const [activeStep, setActiveStep] = React.useState(0);
+  const maxSteps = data_to_arrange.length;
+
+  const handleNext = () => {
+    if (data_to_arrange.length > (activeStep + 1)) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }else {
+      console.log('You have reached the maximum');
     }
-  }
+  };
 
-  swiped = (direction, nameToDelete,barcode) => {
-      // console.log('removing: ' + nameToDelete)
-      // console.log('direction: ' + direction)
-      this.setState({
-        lastDirection:direction
-      })
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
 
-      if (direction === 'right') {
-        this.addToCorrectPrices(barcode)
+  const addToCorrectPrices = (item) =>{
+    let check = 0
+    for (var i = 0; i < correct_prices.length; i++) {
+      if (correct_prices[i].barcode == item.barcode){
+        check =1
       }
-      else if(direction === 'left') {
-        this.addToWrongPrices(barcode)
-      }
-
-  }
-  addToCorrectPrices = (item) =>{
-    correct_prices.push(item)
+    }
+    if (check == 0) {
+      correct_prices.push(item)
+    }
     console.log('correct prices are: ',correct_prices);
+    handleNext()
   }
 
-  addToWrongPrices = (item) =>{
-    wrong_prices.push(item)
+  const addToWrongPrices = (item) =>{
+    let check = 0
+    for (var i = 0; i < wrong_prices.length; i++) {
+      if (wrong_prices[i].barcode == item.barcode){
+        check =1
+      }
+    }
+    if (check == 0) {
+      wrong_prices.push(item)
+    }
     console.log('wrong prices are: ',wrong_prices);
+    handleNext()
   }
 
-  outOfFrame = (name) => {
-      // console.log(name + ' left the screen!')
+  const addToIgnoreNowPrices = (item) =>{
+    let check = 0
+    for (var i = 0; i < ignore_prices.length; i++) {
+      if (ignore_prices[i].barcode == item.barcode){
+        check =1
+      }
+    }
+    if (check == 0) {
+      ignore_prices.push(item)
+    }
+    console.log('Ignore prices are: ',ignore_prices);
+    handleNext()
   }
-  render() {
-    return (
-        // <div className='cardContainer' style={{justifyContent: 'center',alignItems: 'center',display: 'flex',paddingTop: 0}}>
-        //   {
-        //     data_to_arrange.map((item)=>
-        //
-        //       <TinderCard className='swipe' key={item.name} onSwipe={(dir) => this.swiped(dir, item.name,item.barcode) } onCardLeftScreen={() => this.outOfFrame(item.name)}>
-        //         <div className='card' style={{padding: 10}}>
-        //
-        //           <div style={{maxWidth: 375,overflow: 'hidden'}}>
-        //             <img
-        //               src={'https://nana.sa/'+item.image}
-        //               alt="صورة المنتج"
-        //               style={{maxHeight: 250,maxWidth: '100%'}}
-        //             />
-        //           </div>
-        //
-        //           <h5 style={{color: 'black'}}>{item.name}</h5>
-        //           <div style={{display: 'flex',flexDirection: 'row',alignItems: 'center',paddingBottom: 0,marginBottom: 0}}>
-        //             <h2 style={{color: 'red'}}>{item.price.toFixed(2)} </h2>
-        //           <h5 style={{color: 'red',marginLeft: 5}}> SAR </h5>
-        //           </div>
-        //
-        //           {/* <h4 style={{color:'red'}}>هل السعر صحيح؟</h4> */}
-        //           <Button variant="success" block style={{height: 30,padding: 0,marginBottom: 5}}>اعتماد</Button>
-        //
-        //           <div style={{display: 'flex',flexDirection: 'row',width: '100%',justifyContent: 'space-between',alignItems: 'center',height: 30}}>
-        //             <Button onClick={() =>console.log(TinderCard)} variant="secondary" style={{width: '49%',height: 30,padding: 0}}>لاحقاً</Button>
-        //           <Button variant="danger" style={{width: '49%',height: 30,padding: 0}}>تغيير السعر</Button>
-        //           </div>
-        //           <Barcode style={{marginTop: 0,maxWidth:'100%'}}value={item.barcode} format={item.barcode.length===13 ? "EAN13" : item.barcode.length===8 ? "EAN8" : "UPC"} width={1.5}  height={40}/>
-        //
-        //         </div>
-        //       </TinderCard>
-        //   )}
-        // </div>
-        <div className="container" style={{display: 'flex',justifyContent: 'center',alignItems: 'center'}}>
-          <Card />
+
+  return (
+    <div className={classes.root} style={{padding: 10,borderWidth: 3,borderColor: '#FAFAFA',borderStyle: 'solid',borderRadius: 15}}>
+      <img
+        className={classes.img}
+        src={'https://nana.sa/'+data_to_arrange[activeStep].image}
+        alt={data_to_arrange[activeStep].label}
+      />
+      <Paper square elevation={0} className={classes.header}>
+        <h4 style={{textAlign:'center'}}>{data_to_arrange[activeStep].name}</h4>
+      </Paper>
+      <Paper square elevation={0} className={classes.header}>
+        <div style={{display: 'flex',flexDirection: 'row',alignItems: 'center',paddingBottom: 0,marginBottom: 0}}>
+          <h2 style={{color: 'red'}}>{data_to_arrange[activeStep].price.toFixed(2)} </h2>
+          <h5 style={{color: 'red',marginLeft: 5}}> SAR </h5>
         </div>
-    );
-  }
+      </Paper>
 
+      <Paper square elevation={0} className={classes.header2}>
+
+        <Button onClick={() => addToCorrectPrices(data_to_arrange[activeStep])} variant="success" block style={{height: 30,padding: 0,marginBottom: 5}}>اعتماد</Button>
+        <div style={{display: 'flex',flexDirection: 'row',width: '100%',justifyContent: 'space-between',alignItems: 'center',height: 30}}>
+          <Button onClick={() => addToIgnoreNowPrices(data_to_arrange[activeStep])} variant="secondary" style={{width: '49%',height: 30,padding: 0}}>لاحقاً</Button>
+          <Button onClick={() => addToWrongPrices(data_to_arrange[activeStep])} variant="danger" style={{width: '49%',height: 30,padding: 0}}>تغيير السعر</Button>
+        </div>
+        <Barcode style={{marginTop: 5,maxWidth:'100%'}}value={data_to_arrange[activeStep].barcode} format={data_to_arrange[activeStep].barcode.length===13 ? "EAN13" : data_to_arrange[activeStep].barcode.length===8 ? "EAN8" : "UPC"} width={1.5}  height={40}/>
+      </Paper>
+
+
+      <MobileStepper
+        steps={maxSteps}
+        position="static"
+        variant="text"
+        activeStep={activeStep}
+        nextButton={
+          <Button2 size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
+            {/* Next
+            {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />} */}
+          </Button2>
+        }
+        backButton={
+          <Button2 size="small" onClick={handleBack} disabled={activeStep === 0}>
+            {/* {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+            Back */}
+          </Button2>
+        }
+      />
+    </div>
+  );
 }
-
-export default App;
