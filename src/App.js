@@ -701,7 +701,7 @@ export default function App() {
         <Paper square elevation={2} className={classes.header}>
           <h4 style={{textAlign:'center'}}>{data_to_arrange[activeStep].name}</h4>
         </Paper>
-        <div style={{display: 'flex',width: '100%',justifyContent: 'center',alignItems: 'center',height: '30%'}}>
+        <div style={{display: 'flex',width: '100%',justifyContent: 'center',alignItems: 'center',maxHeight: '30%'}}>
           <img
             className={classes.img}
             src={'https://nana.sa/'+data_to_arrange[activeStep].image}
