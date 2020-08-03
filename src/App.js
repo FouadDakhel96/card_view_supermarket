@@ -612,7 +612,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent:'center',
     marginBottom:5,
-    height: '10%',
     paddingRight:10,
     paddingLeft:10,
     // paddingLeft: theme.spacing(4),
@@ -698,25 +697,27 @@ export default function App() {
     <div style={{display: 'flex',justifyContent: 'center',alignItems: 'center'}}>
 
       <div className={classes.root} style={{height: window.innerHeight,display: 'flex',flexDirection: 'column',justifyContent: 'space-between'}}>
-        <Paper square elevation={2} className={classes.header}>
-          <h4 style={{textAlign:'center'}}>{data_to_arrange[activeStep].name}</h4>
+
+        <Paper square elevation={2} className={classes.header} style={{height: '10%',maxHeight: '10%'}}>
+          <h5 style={{textAlign:'center'}}>{data_to_arrange[activeStep].name}</h5>
         </Paper>
-        <div style={{display: 'flex',width: '100%',justifyContent: 'center',alignItems: 'center',maxHeight: '30%'}}>
+
+        <div style={{display: 'flex',width: '100%',justifyContent: 'center',alignItems: 'center',height: '30%',maxHeight: '30%'}}>
           <img
             className={classes.img}
             src={'https://nana.sa/'+data_to_arrange[activeStep].image}
             alt={data_to_arrange[activeStep].label}
           />
         </div>
-        <Paper square elevation={0} className={classes.header}>
+
+        <Paper square elevation={0} className={classes.header} style={{height: '10%',maxHeight: '10%'}}>
           <div style={{display: 'flex',flexDirection: 'row',alignItems: 'center',paddingBottom: 0,marginBottom: 0}}>
             <h2 style={{color: 'red'}}>{data_to_arrange[activeStep].price.toFixed(2)} </h2>
             <h5 style={{color: 'red',marginLeft: 5}}> SAR </h5>
           </div>
         </Paper>
 
-        <Paper square elevation={0} className={classes.header2}>
-
+        <Paper square elevation={0} className={classes.header2} style={{height: '30%',maxHeight: '30%',paddingTop: 10,paddingBottom: 10}}>
           <Button variant="contained" color="primary" onClick={() => addToCorrectPrices(data_to_arrange[activeStep])} style={{width: '100%',height: 40,padding: 0,marginBottom: 10}}>اعتماد</Button>
           <div style={{display: 'flex',flexDirection: 'row',width: '100%',justifyContent: 'space-between',alignItems: 'center',height: 40,marginBottom: 10}}>
             <Button variant="contained" color="default" onClick={() => addToIgnoreNowPrices(data_to_arrange[activeStep])} style={{width: '49%',height: 40,padding: 0}}>لاحقاً</Button>
@@ -726,7 +727,6 @@ export default function App() {
             <Barcode style={{marginTop: 5,maxWidth:'100%'}}value={data_to_arrange[activeStep].barcode} format={data_to_arrange[activeStep].barcode.length===13 ? "EAN13" : data_to_arrange[activeStep].barcode.length===8 ? "EAN8" : "UPC"} width={1.5}  height={60}/>
           </div>
         </Paper>
-
 
         <MobileStepper
           steps={maxSteps}
