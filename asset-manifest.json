@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/card_view_supermarket/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/card_view_supermarket/static/js/main.02755165.chunk.js",
-    "main.js.map": "/card_view_supermarket/static/js/main.02755165.chunk.js.map",
+    "main.js": "/card_view_supermarket/static/js/main.c905a690.chunk.js",
+    "main.js.map": "/card_view_supermarket/static/js/main.c905a690.chunk.js.map",
     "runtime-main.js": "/card_view_supermarket/static/js/runtime-main.ec4cf71b.js",
     "runtime-main.js.map": "/card_view_supermarket/static/js/runtime-main.ec4cf71b.js.map",
     "static/js/2.b4700b17.chunk.js": "/card_view_supermarket/static/js/2.b4700b17.chunk.js",
     "static/js/2.b4700b17.chunk.js.map": "/card_view_supermarket/static/js/2.b4700b17.chunk.js.map",
     "index.html": "/card_view_supermarket/index.html",
-    "precache-manifest.db33fb0cb5d39f04312429b88da2d3e0.js": "/card_view_supermarket/precache-manifest.db33fb0cb5d39f04312429b88da2d3e0.js",
+    "precache-manifest.7595f6587667f27b2c6479ea602152d9.js": "/card_view_supermarket/precache-manifest.7595f6587667f27b2c6479ea602152d9.js",
     "service-worker.js": "/card_view_supermarket/service-worker.js",
     "static/css/main.5ecd60fb.chunk.css.map": "/card_view_supermarket/static/css/main.5ecd60fb.chunk.css.map",
     "static/js/2.b4700b17.chunk.js.LICENSE.txt": "/card_view_supermarket/static/js/2.b4700b17.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.ec4cf71b.js",
     "static/js/2.b4700b17.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.02755165.chunk.js"
+    "static/js/main.c905a690.chunk.js"
   ]
 }
