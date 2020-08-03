@@ -626,7 +626,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
   },
   img: {
-    maxHeight: 300,
+    maxHeight: '100%',
     maxWidth: 400,
     overflow: 'hidden',
     // display: 'block',
