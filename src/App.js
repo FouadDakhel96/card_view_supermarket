@@ -342,10 +342,10 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Button2 from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import { Button } from 'react-bootstrap';
+// import { Button } from 'react-bootstrap';
 var Barcode = require('react-barcode');
 
 
@@ -602,29 +602,35 @@ let ignore_prices =[]
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 400,
-    flexGrow: 1,
+    // maxWidth: 400,
+    width:'100%',
+    // flexGrow: 1,
+    // height:'100%'
   },
   header: {
     display: 'flex',
     alignItems: 'center',
     justifyContent:'center',
     marginBottom:5,
-    height: 50,
+    height: '10%',
+    paddingRight:10,
+    paddingLeft:10,
     // paddingLeft: theme.spacing(4),
     backgroundColor: theme.palette.background.default,
   },
   header2: {
     marginBottom:5,
+    paddingRight:10,
+    paddingLeft:10,
     // paddingLeft: theme.spacing(4),
     backgroundColor: theme.palette.background.default,
   },
   img: {
-    height: 255,
+    maxHeight: 300,
     maxWidth: 400,
     overflow: 'hidden',
-    display: 'block',
-    width: '100%',
+    // display: 'block',
+    // width: '100%',
   },
 }));
 
@@ -689,16 +695,19 @@ export default function App() {
   }
 
   return (
-    <div className="container" style={{display: 'flex',justifyContent: 'center',alignItems: 'center'}}>
-      <div className={classes.root} style={{padding: 10,borderWidth: 3,borderColor: '#FAFAFA',borderStyle: 'solid',borderRadius: 15,marginTop: 20}}>
-        <img
-          className={classes.img}
-          src={'https://nana.sa/'+data_to_arrange[activeStep].image}
-          alt={data_to_arrange[activeStep].label}
-        />
-        <Paper square elevation={0} className={classes.header}>
+    <div style={{display: 'flex',justifyContent: 'center',alignItems: 'center'}}>
+
+      <div className={classes.root} style={{height: window.innerHeight,display: 'flex',flexDirection: 'column',justifyContent: 'space-between'}}>
+        <Paper square elevation={2} className={classes.header}>
           <h4 style={{textAlign:'center'}}>{data_to_arrange[activeStep].name}</h4>
         </Paper>
+        <div style={{display: 'flex',width: '100%',justifyContent: 'center',alignItems: 'center',height: '30%'}}>
+          <img
+            className={classes.img}
+            src={'https://nana.sa/'+data_to_arrange[activeStep].image}
+            alt={data_to_arrange[activeStep].label}
+          />
+        </div>
         <Paper square elevation={0} className={classes.header}>
           <div style={{display: 'flex',flexDirection: 'row',alignItems: 'center',paddingBottom: 0,marginBottom: 0}}>
             <h2 style={{color: 'red'}}>{data_to_arrange[activeStep].price.toFixed(2)} </h2>
@@ -708,13 +717,13 @@ export default function App() {
 
         <Paper square elevation={0} className={classes.header2}>
 
-          <Button onClick={() => addToCorrectPrices(data_to_arrange[activeStep])} variant="success" block style={{height: 30,padding: 0,marginBottom: 5}}>اعتماد</Button>
-          <div style={{display: 'flex',flexDirection: 'row',width: '100%',justifyContent: 'space-between',alignItems: 'center',height: 30}}>
-            <Button onClick={() => addToIgnoreNowPrices(data_to_arrange[activeStep])} variant="secondary" style={{width: '49%',height: 30,padding: 0}}>لاحقاً</Button>
-            <Button onClick={() => addToWrongPrices(data_to_arrange[activeStep])} variant="danger" style={{width: '49%',height: 30,padding: 0}}>تغيير السعر</Button>
+          <Button variant="contained" color="primary" onClick={() => addToCorrectPrices(data_to_arrange[activeStep])} style={{width: '100%',height: 40,padding: 0,marginBottom: 10}}>اعتماد</Button>
+          <div style={{display: 'flex',flexDirection: 'row',width: '100%',justifyContent: 'space-between',alignItems: 'center',height: 40,marginBottom: 10}}>
+            <Button variant="contained" color="default" onClick={() => addToIgnoreNowPrices(data_to_arrange[activeStep])} style={{width: '49%',height: 40,padding: 0}}>لاحقاً</Button>
+            <Button variant="contained" color="secondary" onClick={() => addToWrongPrices(data_to_arrange[activeStep])} style={{width: '49%',height: 40,padding: 0}}>تغيير السعر</Button>
           </div>
           <div style={{display: 'flex',justifyContent: 'center',alignItems: 'center',width: '100%'}}>
-            <Barcode style={{marginTop: 5,maxWidth:'100%'}}value={data_to_arrange[activeStep].barcode} format={data_to_arrange[activeStep].barcode.length===13 ? "EAN13" : data_to_arrange[activeStep].barcode.length===8 ? "EAN8" : "UPC"} width={1.5}  height={40}/>
+            <Barcode style={{marginTop: 5,maxWidth:'100%'}}value={data_to_arrange[activeStep].barcode} format={data_to_arrange[activeStep].barcode.length===13 ? "EAN13" : data_to_arrange[activeStep].barcode.length===8 ? "EAN8" : "UPC"} width={1.5}  height={60}/>
           </div>
         </Paper>
 
@@ -725,16 +734,16 @@ export default function App() {
           variant="text"
           activeStep={activeStep}
           nextButton={
-            <Button2 size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
-              {/* Next
-              {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />} */}
-            </Button2>
+            <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
+              Next
+              {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+            </Button>
           }
           backButton={
-            <Button2 size="small" onClick={handleBack} disabled={activeStep === 0}>
-              {/* {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-              Back */}
-            </Button2>
+            <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+               {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+              Back
+            </Button>
           }
         />
       </div>
